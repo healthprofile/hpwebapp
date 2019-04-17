@@ -1,22 +1,33 @@
-import React from 'react';
+import React             from 'react';
+import axios            from 'axios';
 
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {}
+  }
+
+  componentDidMount(event) {
+    axios.get('/appts/all')
+    .then((appointments) => {
+      this.setState({
+        appointments: appointments.data
+      });
+    })
   }
 
   render() {
     return (
       <div>
-
-<p>       
+          {/* Show latest appts to prove it's workring */}
           <title>W3.CSS Template</title>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
           <style dangerouslySetInnerHTML={{__html: "\nbody {font-family: \"Times New Roman\", Georgia, Serif;}\nh1, h2, h3, h4, h5, h6 {\n  font-family: \"Playfair Display\";\n  letter-spacing: 5px;\n}\n" }} />
           {/* Navbar (sit on top) */}
-        </p><div className="w3-top">
+          <div className="w3-top">
           <div className="w3-bar w3-white w3-padding w3-card" style={{letterSpacing: '4px'}}>
             <a href="#home" className="w3-bar-item w3-button">Health Profile</a>
             {/* Right-sided navbar links. Hide them on small screens */}
@@ -49,6 +60,7 @@ export default class Dashboard extends React.Component {
           </div>
           <hr />
           <hr />
+          Appointments: {JSON.stringify(this.state.appointments)}
           {/* Contact Section */}
           <div className="w3-container w3-padding-64" id="contact">
             <h1>Contact</h1><br />
@@ -68,7 +80,6 @@ export default class Dashboard extends React.Component {
           <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" className="w3-hover-text-green">w3.css</a></p>
         </footer>
         <p />
-      
       </div>
     )
   }

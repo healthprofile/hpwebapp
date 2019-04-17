@@ -15,6 +15,7 @@ require('./config/passport/passport.js')(passport, models.User);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
+var appts = require('./routes/appts');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', routes);
 app.use('/auth', auth);
+app.use('/appts', appts);
 
 
 // catch 404 and forward to error handler
