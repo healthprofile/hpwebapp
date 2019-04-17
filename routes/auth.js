@@ -13,7 +13,7 @@ router.post('/signup', passport.authenticate('local-signup'), function(req, res)
   }
 });
 
-router.post('/login', passport.authenticate('local-login'), function(req, res) {
+router.post('/login', passport.authenticate('local-signin'), function(req, res) {
   if (req.user) {
     res.send(200);
   } else {
