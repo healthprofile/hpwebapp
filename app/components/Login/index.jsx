@@ -40,7 +40,7 @@ class Login extends React.Component {
 
  render() {
    return (
-     <div>
+     <div className = "container-fluid">
        <form onSubmit={this.handleSubmit}>
          <div className="form-inputs">
            <input
