@@ -40,6 +40,16 @@ class Login extends React.Component {
 
  render() {
    return (
+     <div>
+    <nav className="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+      <a className="navbar-brand" href="#">Health Profile</a>
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <a className="nav-link" href="/signup">Sign Up</a>
+        </li>
+      </ul>
+    </nav>
+
      <div className = "container-fluid">
        <form onSubmit={this.handleSubmit}>
          <div className="form-inputs">
@@ -67,6 +77,7 @@ class Login extends React.Component {
        <div id="error">
        </div>
      </div>
+    </div>
    );
  }
 }
