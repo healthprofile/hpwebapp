@@ -20,6 +20,18 @@ router.get('/dashboard', (req, res, next) => {
   res.render('index');
 });
 
+router.get('/myrecords', (req, res, next) => {
+  res.render('index');
+});
+
+router.get('/newappointment', (req, res, next) => {
+  res.render('index');
+});
+
+router.get('/forum', (req, res, next) => {
+  res.render('index');
+});
+
 router.get('/signup', (req, res, next) => {
   res.render('index');
 });
