@@ -2,85 +2,238 @@ import React             from 'react';
 import axios            from 'axios';
 
 export default class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
+   this.handleSubmit = this.handleSubmit.bind(this);
+   this.changeInput = this.changeInput.bind(this);
 
-    this.state = {}
-  }
+   this.state = {
+       allergen: '',
+       riskPercent: ''
+   }
+	}
 
-  componentDidMount(event) {
-    axios.get('/appts/all')
-    .then((appointments) => {
-      this.setState({
-        appointments: appointments.data
-      });
-    })
-  }
+ changeInput(event) {
+   const type = event.target.dataset.type;
+   const value = event.target.value;
 
-  render() {
-    return (
-      <div>
-          {/* Show latest appts to prove it's workring */}
-          <title>W3.CSS Template</title>
-          <meta charSet="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-          <style dangerouslySetInnerHTML={{__html: "\nbody {font-family: \"Times New Roman\", Georgia, Serif;}\nh1, h2, h3, h4, h5, h6 {\n  font-family: \"Playfair Display\";\n  letter-spacing: 5px;\n}\n" }} />
-          {/* Navbar (sit on top) */}
-          <div className="w3-top">
-          <div className="w3-bar w3-white w3-padding w3-card" style={{letterSpacing: '4px'}}>
-            <a href="#home" className="w3-bar-item w3-button">Health Profile</a>
-            {/* Right-sided navbar links. Hide them on small screens */}
-            <div className="w3-right w3-hide-small">
-              <a href="#login" className="w3-bar-item w3-button">Login</a>
-              <a href="#signup" className="w3-bar-item w3-button">Sign Up</a>
-              {/*<a href="#contact" className="w3-bar-item w3-button">Contact</a>*/}
-            </div>
-          </div>
-        </div>
-        {/* Header */}
-        <header className="w3-display-container w3-content w3-wide" style={{maxWidth: '1600px', minWidth: '500px'}} id="home">
-          <img className="w3-image" src="/w3images/hamburger.jpg" alt="Hamburger Catering" width={1600} height={800} />
-          <div className="w3-display-bottomleft w3-padding-large w3-opacity">
-            <h1 className="w3-xxlarge">Le Catering</h1>
-          </div>
-        </header>
-        {/* Page content */}
-        <div className="w3-content" style={{maxWidth: '1100px'}}>
-          {/* About Section */}
-          <div className="w3-row w3-padding-64" id="about">
-            <div className="w3-col m6 w3-padding-large w3-hide-small">
-              <img src="/w3images/tablesetting2.jpg" className="w3-round w3-image w3-opacity-min" alt="Table Setting" width={600} height={750} />
-            </div>
-            <div className="w3-col m6 w3-padding-large">
-              <h1 className="w3-center">About Health Profile</h1><br />
-              <p className="w3-large">This Health Profile app was created to allow users to document their appointments....</p>
-             
-            </div>
-          </div>
-          <hr />
-          <hr />
-          Appointments: {JSON.stringify(this.state.appointments)}
-          {/* Contact Section */}
-          <div className="w3-container w3-padding-64" id="contact">
-            <h1>Contact</h1><br />
-            <p>Let the developers know how they can improve!</p>
-            <form action="/action_page.php" target="_blank">
-              <p><input className="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name" /></p>
-              {/*<p><input className="w3-input w3-padding-16" type="number" placeholder="How many people" required name="People" /></p>*/}
-              {/*<p><input className="w3-input w3-padding-16" type="datetime-local" placeholder="Date and time" required name="date" defaultValue="2017-11-16T20:00" /></p>*/}
-              <p><input className="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message" /></p>
-              <p><button className="w3-button w3-light-grey w3-section" type="submit">SEND MESSAGE</button></p>
-            </form>
-          </div>
-          {/* End page content */}
-        </div>
-        {/* Footer */}
-        <footer className="w3-center w3-light-grey w3-padding-32">
-          <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" className="w3-hover-text-green">w3.css</a></p>
-        </footer>
-        <p />
-      </div>
-    )
-  }
+   this.setState({
+     [type]: value
+   });
+ }
+
+ handleSubmit(e) {
+   e.preventDefault();
+   const context = this;
+   axios.post('/index/addAllergen', {
+      allergen: context.state.allergen,
+      riskPercent: context.state.riskPercent,
+   })
+   .then((res) => {
+   	console.log(res);
+     // window.location = '/dashboard'
+   })
+   .catch((err) => {
+     console.error("There's an error");
+   })
+ }
+
+	render() {
+		return (
+			<div>
+				<nav className="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+					<a className="navbar-brand" href="/dashboard">
+						Health Profile
+					</a>
+					<ul className="navbar-nav">
+						<li className="nav-item">
+							<a className="nav-link" href="/myprofile">
+								My Profile
+							</a>
+						</li>
+					</ul>
+				</nav>
+
+				<div className="container-fluid">
+										<div className="margin-bottom50px"><span><p></p></span></div>
+					<h1 className="text-center margin-top100px"> MY HEALTH PROFILE </h1>
+						<div className="margin-bottom50px"><span><p></p></span></div>
+
+
+	<div className="container">
+	<div className="row">
+		<div className="col">
+			<h3> OVERVIEW </h3>
+		</div>
+		<div className="col">
+			<h3> UPCOMING APPOINTMENTS </h3>
+			<button type="button" className="btn btn-primary">Add Appointment</button>
+		</div>
+	</div>
+	</div>
+	<div className="margin-bottom50px"><span><p></p></span></div>
+<div className="margin-bottom50px"><span><p></p></span></div>
+<div className="margin-bottom50px"><span><p></p></span></div>
+						<div className="margin-bottom50px"><span><p></p></span></div>
+						<div className="margin-bottom50px"><span><p></p></span></div>
+					<div className="container-fluid">
+											<div className="margin-bottom50px"><span><p></p></span></div>
+					<h1 className="text-center margin-top100px"> MY RECORDS </h1>
+
+
+					
+						<p>
+							<button
+								className="btn btn-outline-danger btn-lg btn-block"
+								type="button"
+								data-toggle="collapse"
+								data-target="#allergies"
+								aria-expanded="false"
+								aria-controls="collapseExample"
+							>
+								Allergies
+							</button>
+						</p>
+						<div className="collapse padding-bottom50px" id="allergies">
+							<div className="card card-body">
+								Anim pariatur cliche reprehenderit, enim eiusmod high life
+								accusamus terry richardson ad squid. Nihil anim keffiyeh
+								helvetica, craft beer labore wes anderson cred nesciunt sapiente
+								ea proident.
+
+							<div className="container">
+								<table className="table">
+							  <thead className="thead-dark">
+							    <tr>
+							      <th scope="col">#</th>
+							      <th scope="col">ALLERGIC TO</th>
+							      <th scope="col">RISK %</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr>
+							      <th scope="row">1</th>
+							      <td>KIWI</td>
+							      <td>12%</td>
+							    </tr>
+							    <tr>
+							      <th scope="row">2</th>
+							      <td>STRAWBERRY</td>
+							      <td>50%</td>
+							    </tr>
+							    <tr>
+							      <th scope="row">3</th>
+							      <td>NUTS</td>
+							      <td>80%</td>
+							    </tr>
+							  </tbody>
+
+							</table>
+							</div>
+							</div>
+							  <div className="margin-bottom50px"><span><p></p></span></div>
+							  <button 
+							  type="button" 
+							  className="btn btn-danger"
+							  data-toggle="collapse"
+								data-target="#saveallergy"
+								aria-expanded="false"
+								aria-controls="collapseExample"
+							  >Add Allergy</button>
+
+								<button type="button" className="collapse btn btn-outline-danger" id="saveallergy">Save Allergy</button>
+						</div>
+
+						<div className="margin-bottom50px"><span><p></p></span></div>
+
+						<p className="padding-top50px">
+							<button
+								className="btn btn-outline-info btn-lg btn-block"
+								type="button"
+								data-toggle="collapse"
+								data-target="#immunization"
+								aria-expanded="false"
+								aria-controls="collapseExample"
+							>
+								Immunization
+							</button>
+						</p>
+
+						<div className="collapse padding-bottom50px" id="immunization">
+							<div className="card card-body">
+								Anim pariatur cliche reprehenderit, enim eiusmod high life
+								accusamus terry richardson ad squid. Nihil anim keffiyeh
+								helvetica, craft beer labore wes anderson cred nesciunt sapiente
+								ea proident.
+														<div className="margin-bottom50px"><span><p></p></span></div>
+	<div className="container">
+	<table className="table">
+  <thead className="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">VACCINATION</th>
+      <th scope="col">DATE</th>
+      <th scope="col">DOCTOR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>MEASLES</td>
+      <td>APRIL 10, 2016</td>
+      <td>DR. OZ</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>CHICKEN POX</td>
+      <td>MAY 10, 2016</td>
+      <td>DR. PHIL</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>ANTI-RABIES</td>
+      <td>JUNE 10, 2016</td>
+      <td>DR. STRANGE</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+							</div>
+						</div>
+
+						<div className="margin-bottom50px"><span><p></p></span></div>
+
+						<p className="padding-top50px">
+							<button
+								className="btn btn-outline-success btn-lg btn-block"
+								type="button"
+								data-toggle="collapse"
+								data-target="#Medications"
+								aria-expanded="false"
+								aria-controls="collapseExample"
+							>
+								Medications
+							</button>
+						</p>
+						<div className="collapse padding-bottom50px" id="Medications">
+							<div className="card card-body">
+								Anim pariatur cliche reprehenderit, enim eiusmod high life
+								accusamus terry richardson ad squid. Nihil anim keffiyeh
+								helvetica, craft beer labore wes anderson cred nesciunt sapiente
+								ea proident.
+								<img src="https://www.dailyarthub.com/wp-content/uploads/2018/04/DAH_Medicines.jpg" className="img-150x150"></img>
+
+							</div>
+						</div>
+
+					</div>
+
+	</div>
+
+
+				</div>
+
+		)
+	}
 } 

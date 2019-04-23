@@ -5,7 +5,8 @@ import App from './App/index.jsx';
 import Signup from './Signup/index.jsx';
 import Login from './Login/index.jsx';
 import Dashboard from './Dashboard/index.jsx';
-
+import MyRecords from './MyRecords/index.jsx';
+import NewAppointment from './NewAppointment/index.jsx';
 
 ReactDOM.render((
     <Router history={browserHistory}>
@@ -13,5 +14,7 @@ ReactDOM.render((
       <Route path="/signup" component={Signup}></Route>
       <Route path="/login" component={Login}></Route>
       <Route path="/dashboard" component={Dashboard}></Route>
+      <Route path="/myrecords" component={MyRecords}></Route>
+      <Route path="/newappointment" component={NewAppointment}></Route>
     </Router>
 ), document.getElementById('app'));
