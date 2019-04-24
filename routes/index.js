@@ -20,7 +20,7 @@ router.get('/dashboard', (req, res, next) => {
   res.render('index');
 });
 
-router.get('/myprofile', (req, res, next) => {
+router.get('/myprofile', isLoggedIn, (req, res, next) => {
   res.render('index');
 });
 

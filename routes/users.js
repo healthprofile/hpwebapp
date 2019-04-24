@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
+const models = require('../models');
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()){
@@ -12,6 +12,16 @@ function isLoggedIn(req, res, next) {
 router.post('/addAllergen', (req, res, next) => {
 	console.log("addAllergen")
   // res.render('index');
+});
+
+router.get('/getinfo', (req, res, next) => {
+	//res.send({firstName: 'Morsal'});
+	models.User.findOne({
+		where: {id: req.user.id},
+	})
+	.then((user) => {
+		res.send(user);
+	});
 });
 
 module.exports = router;

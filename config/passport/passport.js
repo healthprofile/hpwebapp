@@ -42,9 +42,9 @@ module.exports = function(passport,user){
           const data = {
             email: email,
             password: password,
-            firstName: req.body.firstname,
-            lastName: req.body.lastname,
-            phoneNumber: req.body.phonenumber,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNumber: req.body.phoneNumber,
             gender: req.body.gender,
             address: req.body.address
           };

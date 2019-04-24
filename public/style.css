@@ -101,9 +101,15 @@ body{
 
 .img-150x150{
 	width: 150px !important;
-	height: 150px !important;
+	height: 150px !important
 }
 
-.blue{
-	background-color: blue;
+.fiftypx-left-padding{
+/*	padding-left: 60%;*/
+	padding-top: 5%
+}
+
+.feed-img {
+	height: 50%;
+  	width: 50%;
 }
