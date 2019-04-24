@@ -107,7 +107,7 @@ export default class Dashboard extends React.Component {
 		</div>
 		<div className="col">
 			<h3> UPCOMING APPOINTMENTS </h3>
-      <form onClick={this.handleAddAppointment.bind(this)}>
+      <form>
          <div className="form-inputs">
           	Appointment Title: 
            <input
@@ -115,7 +115,7 @@ export default class Dashboard extends React.Component {
              className=""
              type='text'
              placeholder='appointment title'
-             data-type='text'
+             data-type='appointmentTitle'
              />
            <span id="appointmentTitle"></span>
            <br/>
@@ -126,7 +126,7 @@ export default class Dashboard extends React.Component {
              className=""
              type='text'
              placeholder='appointment type'
-             data-type='text'
+             data-type='appointmentType'
              />
            <span id="appointmentType"></span>
 						<br/>
@@ -135,9 +135,9 @@ export default class Dashboard extends React.Component {
            <input
              onChange={this.changeInput}
              className=""
-             type='date'
+             type='datetime-local'
              placeholder='appointment date'
-             data-type='date'
+             data-type='appointmentDate'
              />
            <span id="appointmentDate"></span>
            <br/>
@@ -147,13 +147,13 @@ export default class Dashboard extends React.Component {
              className=""
              type='text'
              placeholder='appointment details'
-             data-type='text'
+             data-type='appointmentDetails'
              />
            <span id="appointmentDetails"></span>
 						<br/>
 
            <div className="submit">
-           		<button id="submit" type="submit" className="btn btn-primary">Add Appointment</button>
+           		<button type="button" className="btn btn-primary"  onClick={this.handleAddAppointment.bind(this)}>Add Appointment</button>
            </div>
          </div>
        </form>
