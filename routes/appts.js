@@ -25,5 +25,12 @@ router.get('/all', function(req, res, next) {
   })
 });
 
+router.post('/addAppointment', function(req, res, next) {
+  // models.Appointments.()
+  console.log("addAppointment");
+  console.log(body.res);
+
+});
+
 
 module.exports = router;
