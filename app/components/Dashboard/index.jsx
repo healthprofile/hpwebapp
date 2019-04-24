@@ -9,7 +9,12 @@ export default class Dashboard extends React.Component {
 
    this.state = {
        allergen: '',
-       riskPercent: ''
+       riskPercent: '',
+       appointmentDate: '',
+       appointmentTitle: '',
+       appointmentDetails: '',
+       appointmentType: '',
+
    }
 	}
 
@@ -38,6 +43,38 @@ export default class Dashboard extends React.Component {
    })
  }
 
+ handleAddAppointment(e){
+ 	 e.preventDefault();
+ 	 const context = this;
+   axios.post('/appts/addAppointment', {
+      appointmentTitle: context.state.appointmentTitle,
+      appointmentType: context.state.appointmentType,
+      appointmentDate: context.state.appointmentDate,
+      appointmentDetails: context.state.appointmentDetails,
+   })
+   .then((res) => {
+   	console.log(res);
+     // window.location = '/dashboard'
+   })
+   .catch((err) => {
+     console.error("There's an error");
+   })
+ }
+
+//  componentDidMount () {
+//     const script = document.createElement("script");
+
+//     script.src = "dashboard-js.js";
+//     script.async = true;
+
+//     document.body.appendChild(script);
+
+//     axios.get('/appts/all')
+//     .then((res) => {
+//     	console.log(res);
+//     });
+// }
+
 	render() {
 		return (
 			<div>
@@ -49,6 +86,9 @@ export default class Dashboard extends React.Component {
 						<li className="nav-item">
 							<a className="nav-link" href="/myprofile">
 								My Profile
+							</a>
+							<a className="nav-link" href="#">
+								Account Settings
 							</a>
 						</li>
 					</ul>
@@ -67,7 +107,57 @@ export default class Dashboard extends React.Component {
 		</div>
 		<div className="col">
 			<h3> UPCOMING APPOINTMENTS </h3>
-			<button type="button" className="btn btn-primary">Add Appointment</button>
+      <form onClick={this.handleAddAppointment.bind(this)}>
+         <div className="form-inputs">
+          	Appointment Title: 
+           <input
+             onChange={this.changeInput}
+             className=""
+             type='text'
+             placeholder='appointment title'
+             data-type='text'
+             />
+           <span id="appointmentTitle"></span>
+           <br/>
+
+            Appointment Type:  
+           <input
+             onChange={this.changeInput}
+             className=""
+             type='text'
+             placeholder='appointment type'
+             data-type='text'
+             />
+           <span id="appointmentType"></span>
+						<br/>
+
+           Appointment Date: 
+           <input
+             onChange={this.changeInput}
+             className=""
+             type='date'
+             placeholder='appointment date'
+             data-type='date'
+             />
+           <span id="appointmentDate"></span>
+           <br/>
+          	Details: 
+           <input
+             onChange={this.changeInput}
+             className=""
+             type='text'
+             placeholder='appointment details'
+             data-type='text'
+             />
+           <span id="appointmentDetails"></span>
+						<br/>
+
+           <div className="submit">
+           		<button id="submit" type="submit" className="btn btn-primary">Add Appointment</button>
+           </div>
+         </div>
+       </form>
+
 		</div>
 	</div>
 	</div>
@@ -94,7 +184,7 @@ export default class Dashboard extends React.Component {
 								Allergies
 							</button>
 						</p>
-						<div className="collapse padding-bottom50px" id="allergies">
+						<div className="collapse" id="allergies">
 							<div className="card card-body">
 								Anim pariatur cliche reprehenderit, enim eiusmod high life
 								accusamus terry richardson ad squid. Nihil anim keffiyeh
@@ -131,7 +221,8 @@ export default class Dashboard extends React.Component {
 							</table>
 							</div>
 							</div>
-							  <div className="margin-bottom50px"><span><p></p></span></div>
+							  
+							  {/*<div className="margin-bottom50px"><span><p></p></span></div>*/}
 							  <button 
 							  type="button" 
 							  className="btn btn-danger"
@@ -146,7 +237,7 @@ export default class Dashboard extends React.Component {
 
 						<div className="margin-bottom50px"><span><p></p></span></div>
 
-						<p className="padding-top50px">
+						<p>
 							<button
 								className="btn btn-outline-info btn-lg btn-block"
 								type="button"
@@ -159,13 +250,13 @@ export default class Dashboard extends React.Component {
 							</button>
 						</p>
 
-						<div className="collapse padding-bottom50px" id="immunization">
+						<div className="collapse" id="immunization">
 							<div className="card card-body">
 								Anim pariatur cliche reprehenderit, enim eiusmod high life
 								accusamus terry richardson ad squid. Nihil anim keffiyeh
 								helvetica, craft beer labore wes anderson cred nesciunt sapiente
 								ea proident.
-														<div className="margin-bottom50px"><span><p></p></span></div>
+														{/*<div className="margin-bottom50px"><span><p></p></span></div>*/}
 	<div className="container">
 	<table className="table">
   <thead className="thead-dark">
@@ -204,7 +295,7 @@ export default class Dashboard extends React.Component {
 
 						<div className="margin-bottom50px"><span><p></p></span></div>
 
-						<p className="padding-top50px">
+						<p>
 							<button
 								className="btn btn-outline-success btn-lg btn-block"
 								type="button"
@@ -216,7 +307,7 @@ export default class Dashboard extends React.Component {
 								Medications
 							</button>
 						</p>
-						<div className="collapse padding-bottom50px" id="Medications">
+						<div className="collapse" id="Medications">
 							<div className="card card-body">
 								Anim pariatur cliche reprehenderit, enim eiusmod high life
 								accusamus terry richardson ad squid. Nihil anim keffiyeh

@@ -20,7 +20,7 @@ router.get('/dashboard', (req, res, next) => {
   res.render('index');
 });
 
-router.get('/myrecords', (req, res, next) => {
+router.get('/myprofile', (req, res, next) => {
   res.render('index');
 });
 
