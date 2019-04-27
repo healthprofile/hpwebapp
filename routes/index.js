@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+// the isLoggedIn is so that every time you leave the page and it logs you out it redirects back to your login
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()){
         return next();
