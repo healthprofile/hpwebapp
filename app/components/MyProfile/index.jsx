@@ -44,12 +44,13 @@ class MyProfile extends React.Component {
 
 				  	<p><b>Gender:</b> {this.state.userData.gender}</p>
 					<p><b>Phone:</b> {this.state.userData.phoneNumber}</p>
+					<p><b>Birthday:</b> {this.state.userData.birthday}</p>
 				  </div>
 				  <div className="col-sm-8 border border-info">
 				  <br/>
 				  	<p>
 				  	<p><b>Bio:</b> {this.state.userData.bio}</p>
-				  	<p><b>Birthday:</b> {this.state.userData.birthday}</p>
+
 				  	</p>
 				  </div>
 				</div>
