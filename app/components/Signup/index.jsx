@@ -117,6 +117,24 @@ class Signup extends React.Component {
                             />
                         <span id="phoneNumber"></span>
                         <br />
+                        <input 
+                            onChange={this.changeInput}
+                            className="login-input formContentSmaller addMargin2percent"
+                            type='text' 
+                            placeholder='MM/DD/YY'
+                            data-type='birthday'
+                            />
+                        <span id="birthday"></span>
+                        <br />
+                        <input 
+                            onChange={this.changeInput}
+                            className="login-input formContentSmaller addMargin2percent"
+                            type='text' 
+                            placeholder='About Me'
+                            data-type='bio'
+                            />
+                        <span id="bio"></span>
+                        <br />
                         <div className="submit">
                             <button id="submit" type="submit" className="btn btn-success addMargin2percent">Sign Up</button>
                         </div>
