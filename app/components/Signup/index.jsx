@@ -117,7 +117,6 @@ class Signup extends React.Component {
                             />
                         <span id="phoneNumber"></span>
                         <br />
-                        <br />
                         <input 
                             onChange={this.changeInput}
                             className="login-input formContentSmaller addMargin2percent"
@@ -126,7 +125,6 @@ class Signup extends React.Component {
                             data-type='birthday'
                             />
                         <span id="birthday"></span>
-                        <br />
                         <br />
                         <input 
                             onChange={this.changeInput}
